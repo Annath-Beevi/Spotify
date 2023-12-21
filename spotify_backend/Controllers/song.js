@@ -21,7 +21,7 @@ const getMySongs = async (req, res) => {
 }
 
 const getArtist = async (req, res) => {
-    const { artistId } = req.body;
+    const { artistId } = req.params;
     const artist = await User.find({ _id: artistId })
     if (!artist) {
         return res.status(301).json({ err: "Artist does not exist" })
@@ -32,7 +32,7 @@ const getArtist = async (req, res) => {
 }
 
 const getName = async (req,res) => {
-    const {songName} = req.body;
+    const {songName} = req.params;
 
     const songs = await Song.find({ name: songName});
     return res.status(200).json({data: songs})

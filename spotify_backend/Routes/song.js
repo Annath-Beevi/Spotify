@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post("/create", passport.authenticate("jwt", { session: false }), createsong)
 router.get("/get/mysongs", passport.authenticate("jwt", { session: false }), getMySongs)
-router.get("/get/artist", passport.authenticate("jwt", { session: false }), getArtist)
-router.get("/get/songname", passport.authenticate("jwt", {session: false}), getName)
+router.get("/get/artist/:artistId", passport.authenticate("jwt", { session: false }), getArtist)
+router.get("/get/songname/:songName", passport.authenticate("jwt", {session: false}), getName)
 
 module.exports = router
