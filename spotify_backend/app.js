@@ -6,12 +6,14 @@ const JwtStrategy = require('passport-jwt').Strategy,
 const passport = require("passport")
 
 const connectDB = require("./DB/connect")
+const cors = require("cors")
 const User = require('./Models/User')
 const authRoute = require('./Routes/auth')
 const songRoute = require('./Routes/song')
 const playlistRoute = require('./Routes/playlist')
-const errorHandler = require('./Middleware/Error-Handler')
+const errorHandler = require('./Middleware/Error-Handler');
 const app = express();
+app.use(cors())
 app.use(express.json())
 const port = 8080
 
@@ -27,18 +29,17 @@ start = async () => {
         let opts = {}
         opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
         opts.secretOrKey = process.env.PASSPORT_SECRET_KEY;
-        passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-            User.findOne({ id: jwt_payload.sub }, function (err, user) {
-                if (err) {
-                    return done(err, false);
-                }
+        passport.use(new JwtStrategy(opts, async function (jwt_payload, done) {
+            try {
+                const user = await User.findOne({id: jwt_payload.sub });
                 if (user) {
-                    return done(null, user);
+                return done(null, user);
                 } else {
-                    return done(null, false);
-                    // or you could create a new account
+                return done(null, false);
                 }
-            });
+                } catch (err) {
+                return done(err, false)
+                }
         }))
         app.listen(port, console.log(`server running on port ${port}`))
     } catch (error) {

@@ -2,7 +2,7 @@ const Song = require('../Models/Song')
 const User = require('../Models/User')
 
 const createsong = async (req, res) => {
-    console.log(req.body)
+    console.log(req.user)
     const { name, thumbnail, track } = req.body;
     if (!name || !thumbnail || !track) {
         return res.status(301).json({ err: "Insufficient details to create song." })
@@ -22,7 +22,7 @@ const getMySongs = async (req, res) => {
 
 const getArtist = async (req, res) => {
     const { artistId } = req.params;
-    const artist = await User.find({ _id: artistId })
+    const artist = await User.findOne({ _id: artistId })
     if (!artist) {
         return res.status(301).json({ err: "Artist does not exist" })
     }
