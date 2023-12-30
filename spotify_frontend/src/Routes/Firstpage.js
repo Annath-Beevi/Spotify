@@ -7,7 +7,7 @@ export const Firstpage = () => {
     const navigate = useNavigate()
 
     const navigateToLogin = () => {
-        navigate('/login')
+        navigate('/home')
     }
 
   return (

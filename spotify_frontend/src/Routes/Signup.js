@@ -22,6 +22,10 @@ const SignupComponent = () => {
             alert("Email and confirm email fields must match. Please check again")
             return
         }
+        if (email.length === 0 || username.length === 0 || password.length === 0 || firstName.length === 0 || lastName.length === 0) {
+            alert("Please enter the fields")
+            return
+        }
         const data = { email, password, username, firstName, lastName }
         const response = await makeUnauthenticatedPOSTRequest("/auth/register", data)
         if (response && !response.err) {
@@ -29,7 +33,6 @@ const SignupComponent = () => {
             const date = new Date();
             date.setDate(date.getDate() + 30);
             setCookie("token", token, { path: "/", expires: date })
-            alert("success")
             navigate("/login")
         } else {
             alert("Failure")

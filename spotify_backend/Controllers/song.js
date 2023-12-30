@@ -16,7 +16,7 @@ const createsong = async (req, res) => {
 
 const getMySongs = async (req, res) => {
     // const currentUser = req.user;
-    const songs = await Song.find({ artist: req.user._id })
+    const songs = await Song.find({ artist: req.user._id }).populate("artist");
     return res.status(200).json({ data: songs })
 }
 
@@ -31,11 +31,11 @@ const getArtist = async (req, res) => {
     return res.status(200).json({ data: songs })
 }
 
-const getName = async (req,res) => {
-    const {songName} = req.params;
+const getName = async (req, res) => {
+    const { songName } = req.params;
 
-    const songs = await Song.find({ name: songName});
-    return res.status(200).json({data: songs})
+    const songs = await Song.find({ name: songName });
+    return res.status(200).json({ data: songs })
 }
 
 module.exports = { createsong, getMySongs, getArtist, getName }

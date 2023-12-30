@@ -90,6 +90,7 @@ const topTrends = [
 
 
 export const Home = () => {
+
     return (
         <div className='h-full w-full flex'>
             {/* This first div will be the left panel */}
@@ -112,6 +113,11 @@ export const Home = () => {
                             iconName={"mdi:cards-heart"}
                             displayText={"Liked Songs"}
                         />
+                        <IconText
+                            iconName={"entypo:music"}
+                            displayText={"My Music"}
+                            targetLink="/myMusic"
+                        />
                     </div>
                 </div>
                 <div className="px-5">
@@ -126,20 +132,18 @@ export const Home = () => {
             {/* This second div will be the right part(main content) */}
             <div className="h-full w-4/5 bg-app-black overflow-auto">
                 <div className='navbar w-full h-1/10 flex items-center justify-end'>
-                    <div className='border border-gray-400 text-white rounded-full px-2 py-1 font-bold mt-3 mr-5'>
+                    <div className='border border-gray-400 text-white rounded-full px-3 py-1.5 font-bold mt-3 mr-7'>
                         <a className='hover:border-white cursor-pointer' href='https://www.spotify.com/us/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade&ref=desktop_loggedin_upgrade_button'>
                             Upgrade
                         </a>
                     </div>
-                    <div className='border border-gray-100 text-white flex items-center justify-center rounded-full px-2 py-1 font-bold mt-3 mr-5 cursor-pointer'>
-                        <Link to="/signup">
-                            Sign up
+                    <div className='border border-gray-400 text-white rounded-full px-3 py-1.5 font-bold mt-3 mr-7'>
+                        <Link to="/uploadsong">
+                            Upload Song
                         </Link>
                     </div>
-                    <div className='border border-gray-100 text-white flex items-center justify-center rounded-full px-2 py-1 font-bold mt-3 mr-32 cursor-pointer'>
-                        <Link to="/login">
-                            Login
-                        </Link>
+                    <div className='border border-gray-100 bg-white flex items-center justify-center rounded-full w-10 h-10 font-bold mt-3 mr-28'>
+                            AB
                     </div>
                 </div>
                 <div className='content p-8 pt-0 overflow-auto'>
