@@ -1,17 +1,47 @@
-import React, { Children, useState } from 'react'
+import React, { useContext, useLayoutEffect, useRef, useState } from 'react'
 import spotify_logo from '../assets/images/spotify_logo_white.svg'
 import IconText from '../Components/shared/IconText'
 import { Icon } from '@iconify/react'
 import { Link } from 'react-router-dom';
 import { Howl, Howler } from "howler";
+import songContext from '../contexts/songContext';
 
 
-export const LoggedInContainer = ({ children }) => {
+export const LoggedInContainer = ({ children, curActiveScreen }) => {
 
-    const [soundPlayed, setSoundPlayed] = useState(null)
-    const [isPaused, setIsPaused] = useState(true)
 
-    const playSound = (songSrc) => {
+
+    const { 
+        currentSong, 
+        setCurrentSong, 
+        soundPlayed, 
+        setSoundPlayed, 
+        isPaused, 
+        setIsPaused
+    } = useContext(songContext)
+
+    const firstUpdate = useRef(true)
+
+    useLayoutEffect(() => {
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+        }
+
+        if (!currentSong) {
+            return
+        }
+        changeSong(currentSong.track)
+    }, [currentSong && currentSong.track])
+
+    const playSound = () => {
+        if (!soundPlayed) {
+            return
+        }
+        soundPlayed.play()
+    }
+
+    const changeSong = (songSrc) => {
         if (soundPlayed) {
             soundPlayed.stop();
         }
@@ -21,6 +51,7 @@ export const LoggedInContainer = ({ children }) => {
         });
         setSoundPlayed(sound)
         sound.play()
+        setIsPaused(false)
     }
 
     const pauseSound = () => {
@@ -29,7 +60,7 @@ export const LoggedInContainer = ({ children }) => {
 
     const togglePlayPause = () => {
         if (isPaused) {
-            playSound("https://res.cloudinary.com/dzml3ff47/video/upload/v1703862411/outeue5begluncv5lpnc.mp4")
+            playSound()
             setIsPaused(false)
         }
         else {
@@ -40,7 +71,7 @@ export const LoggedInContainer = ({ children }) => {
 
     return (
         <div className='h-full w-full bg-app-black'>
-            <div className='h-9/10 w-full flex'>
+            <div className={`${currentSong ? "h-9/10" : "h-full"} w-full flex`}>
                 {/* This first div will be the left panel */}
                 <div className='h-ful w-1/5 bg-black flex flex-col justify-between pb-10'>
                     <div>
@@ -48,9 +79,22 @@ export const LoggedInContainer = ({ children }) => {
                             <img src={spotify_logo} alt='spotify logo' width={125} />
                         </div>
                         <div className="py-5">
-                            <IconText iconName={"material-symbols:home"} displayText={"Home"} active />
-                            <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"} />
-                            <IconText iconName={"bx:library"} displayText={"Library"} />
+                            <IconText
+                                iconName={"material-symbols:home"}
+                                displayText={"Home"}
+                                targetLink={"/home"}
+                                active={curActiveScreen === "home"}
+                            />
+                            <IconText
+                                iconName={"material-symbols:search-rounded"}
+                                displayText={"Search"}
+                                active={curActiveScreen === "search"}
+                            />
+                            <IconText
+                                iconName={"bx:library"}
+                                displayText={"Library"}
+                                active={curActiveScreen === "library"}
+                            />
                         </div>
                         <div className="pt-4">
                             <IconText
@@ -65,6 +109,7 @@ export const LoggedInContainer = ({ children }) => {
                                 iconName={"entypo:music"}
                                 displayText={"My Music"}
                                 targetLink="/myMusic"
+                                active={curActiveScreen === "myMusic"}
                             />
                         </div>
                     </div>
@@ -100,50 +145,52 @@ export const LoggedInContainer = ({ children }) => {
                 </div>
             </div>
             {/* This div is the current playing song */}
-            <div className='w-full h-1/10 bg-black bg-opacity-30 text-white flex items-center px-4'>
-                <div className='w-1/4 flex items-center'>
-                    <img src='https://i.scdn.co/image/ab67616d0000b27374d7f07e7a316eca66852d46' alt='cuurentSongThumbnail'
-                        className='h-14 w-14 rounded' />
-                    <div className='pl-4'>
-                        <div className='text-sm hover:underline cursor-pointer'>Sugar & Brownies</div>
-                        <div className='text-xs text-gray-500 hover:underline cursor-pointer'>Dharia</div>
+            {currentSong && (
+                <div className='w-full h-1/10 bg-black bg-opacity-30 text-white flex items-center px-4'>
+                    <div className='w-1/4 flex items-center'>
+                        <img src={currentSong.thumbnail} alt='cuurentSongThumbnail'
+                            className='h-14 w-14 rounded' />
+                        <div className='pl-4'>
+                            <div className='text-sm hover:underline cursor-pointer'>{currentSong.name}</div>
+                            <div className='text-xs text-gray-500 hover:underline cursor-pointer'>{currentSong.artist.firstName + " " + currentSong.artist.lastName}</div>
+                        </div>
                     </div>
-                </div>
-                <div className='w-1/2 flex justify-center h-full flex-col items-center'>
-                    <div className='flex w-1/3 justify-between items-center'>
-                        {/* Controls for the playing song go here */}
-                        <Icon
-                            icon="ci:shuffle"
-                            fontSize={27}
-                            className='cursor-pointer text-gray-500 hover:text-white'
-                        />
-                        <Icon
-                            icon="ic:sharp-skip-previous"
-                            fontSize={30}
-                            className='cursor-pointer text-gray-500 hover:text-white'
-                        />
-                        <Icon
-                            icon={isPaused ? "ic:baseline-play-circle" : "ic:baseline-pause-circle"}
-                            fontSize={45}
-                            className='cursor-pointer text-gray-500 hover:text-white'
-                            onClick={togglePlayPause}
-                        />
-                        <Icon
-                            icon="ic:sharp-skip-next"
-                            fontSize={30}
-                            className='cursor-pointer text-gray-500 hover:text-white' />
-                        <Icon
-                            icon="ic:baseline-repeat"
-                            fontSize={27}
-                            className='cursor-pointer text-gray-500 hover:text-white'
-                        />
+                    <div className='w-1/2 flex justify-center h-full flex-col items-center'>
+                        <div className='flex w-1/3 justify-between items-center'>
+                            {/* Controls for the playing song go here */}
+                            <Icon
+                                icon="ci:shuffle"
+                                fontSize={27}
+                                className='cursor-pointer text-gray-500 hover:text-white'
+                            />
+                            <Icon
+                                icon="ic:sharp-skip-previous"
+                                fontSize={30}
+                                className='cursor-pointer text-gray-500 hover:text-white'
+                            />
+                            <Icon
+                                icon={isPaused ? "ic:baseline-play-circle" : "ic:baseline-pause-circle"}
+                                fontSize={45}
+                                className='cursor-pointer text-gray-500 hover:text-white'
+                                onClick={togglePlayPause}
+                            />
+                            <Icon
+                                icon="ic:sharp-skip-next"
+                                fontSize={30}
+                                className='cursor-pointer text-gray-500 hover:text-white' />
+                            <Icon
+                                icon="ic:baseline-repeat"
+                                fontSize={27}
+                                className='cursor-pointer text-gray-500 hover:text-white'
+                            />
+                        </div>
+                        {/* <div></div> */}
                     </div>
-                    {/* <div></div> */}
-                </div>
-                <div className='w-1/4 flex justify-end'>
+                    <div className='w-1/4 flex justify-end'>
 
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     )
 };

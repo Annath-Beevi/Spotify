@@ -90,7 +90,7 @@ const topTrends = [
 
 const Home = () => {
     return (
-        <LoggedInContainer>
+        <LoggedInContainer curActiveScreen="home">
             <PlaylistView
                 titleText="Fresh New Music"
                 cardsData={freshNewMusic} />
@@ -110,7 +110,7 @@ export default Home;
 
 const PlaylistView = ({ titleText, cardsData }) => {
     return (
-        <div className='text-white mt-6'>
+        <div className='text-white mt-6 cursor-pointer'>
             <div className='text-2xl font-semibold mb-5'>{titleText}</div>
             <div className="w-full flex justify-between space-x-4">
                 {

@@ -15,8 +15,8 @@ import songContext from './contexts/songContext';
 function App() {
 
   const [currentSong, setCurrentSong] = useState(null);
-    // const [soundPlayed, setSoundPlayed] = useState(null);
-    // const [isPaused, setIsPaused] = useState(true);
+    const [soundPlayed, setSoundPlayed] = useState(null);
+    const [isPaused, setIsPaused] = useState(true);
   const [cookie, setCookie] = useCookies(["token"])
 
   return (
@@ -28,10 +28,10 @@ function App() {
             value={{
               currentSong,
               setCurrentSong,
-              // soundPlayed,
-              // setSoundPlayed,
-              // isPaused,
-              // setIsPaused,
+              soundPlayed,
+              setSoundPlayed,
+              isPaused,
+              setIsPaused,
             }}
           >
             <Routes>

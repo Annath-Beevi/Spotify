@@ -18,7 +18,7 @@ export const MyMusic = () => {
     }, []);
 
     return (
-        <LoggedInContainer>
+        <LoggedInContainer curActiveScreen="myMusic">
             <div className="text-white text-xl font-semibold pb-4 pl-2 pt-8">
                 My Songs
             </div>
