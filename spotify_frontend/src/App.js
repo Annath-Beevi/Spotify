@@ -11,6 +11,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import songContext from './contexts/songContext';
 import SearchPage from './Routes/SearchPage';
+import Library from './Routes/Library';
+import SinglePlaylistView from './Routes/SinglePlaylistView';
 
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
               <Route path='/uploadsong' element={<UploadSong />} />
               <Route path='/myMusic' element={<MyMusic />} />
               <Route path='/search' element={<SearchPage/>}/>
+              <Route path='/library' element={<Library/>}/>
+              <Route path='/playlist/:playlistId' element={<SinglePlaylistView/>}/>
               <Route path='*' element={<Navigate to="/home" />} />
             </Routes>
           </songContext.Provider>
