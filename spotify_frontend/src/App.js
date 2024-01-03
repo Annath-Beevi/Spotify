@@ -10,6 +10,7 @@ import MyMusic from './Routes/myMusic';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import songContext from './contexts/songContext';
+import SearchPage from './Routes/SearchPage';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
               <Route path='/home' element={<LoggedInHomePage />} />
               <Route path='/uploadsong' element={<UploadSong />} />
               <Route path='/myMusic' element={<MyMusic />} />
+              <Route path='/search' element={<SearchPage/>}/>
               <Route path='*' element={<Navigate to="/home" />} />
             </Routes>
           </songContext.Provider>

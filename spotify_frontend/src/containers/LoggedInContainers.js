@@ -88,6 +88,7 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
                             <IconText
                                 iconName={"material-symbols:search-rounded"}
                                 displayText={"Search"}
+                                targetLink={"/search"}
                                 active={curActiveScreen === "search"}
                             />
                             <IconText
