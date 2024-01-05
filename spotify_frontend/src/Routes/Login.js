@@ -21,7 +21,16 @@ const LoginComponent = () => {
             const date = new Date();
             date.setDate(date.getDate() + 30);
             setCookie("token", token, { path: "/", expires: date });
-            navigate("/home");
+            if (response.role === "user") {
+                navigate("/home");
+            }
+            if (response.role === "artist") {
+                navigate("/artistHome")
+            }
+            // if(response.role === "admin"){
+            //     navigate("")
+            // }
+
         } else {
             alert("Failure");
         }
@@ -50,10 +59,10 @@ const LoginComponent = () => {
                     <div className=" w-full flex items-center justify-center my-8">
                         <a href='#' className='text-white cursor-pointer font-semibold hover:text-green-500 ml-6 mr-6'>Forgot your password?</a>
                         <button className="bg-green-500 font-semibold p-3 px-10 rounded-full"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            login();
-                        }}>
+                            onClick={(e) => {
+                                e.preventDefault();
+                                login();
+                            }}>
                             Log In
                         </button>
 

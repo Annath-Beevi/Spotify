@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import LoggedInContainer from "../containers/LoggedInContainers";
-import {makeAuthenticatedGETRequest} from "../utils/serverHelper";
-import SingleSongCard from "../Components/shared/SingleSongCard";
+import LoggedInContainer from "../../containers/LoggedInContainers";
+import {makeAuthenticatedGETRequest} from "../../utils/serverHelper";
+import SingleSongCard from "../../Components/shared/SingleSongCard";
 
-const SinglePlaylistView = () => {
+const ArtistSinglePlaylistView = () => {
     const [playlistDetails, setPlaylistDetails] = useState({});
     const {playlistId} = useParams();
 
@@ -20,7 +20,7 @@ const SinglePlaylistView = () => {
     }, []);
 
     return (
-        <LoggedInContainer curActiveScreen={"library"}>
+        <LoggedInContainer curActiveScreen={"artistLibrary"}>
             {playlistDetails._id && (
                 <div>
                     <div className="text-white text-xl pt-8 font-semibold">
@@ -43,4 +43,4 @@ const SinglePlaylistView = () => {
     );
 };
 
-export default SinglePlaylistView;
+export default ArtistSinglePlaylistView;

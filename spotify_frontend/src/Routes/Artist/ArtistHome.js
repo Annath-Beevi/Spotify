@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import UserLoggedInContainer from '../containers/UserLoggedInContainer';
-import { makeAuthenticatedGETRequest } from '../utils/serverHelper';
+import LoggedInContainer from '../../containers/LoggedInContainers';
+import { makeAuthenticatedGETRequest } from '../../utils/serverHelper';
 import { useContext } from "react"
-import songContext from '../contexts/songContext'
+import songContext from '../../contexts/songContext'
 
 const Home = () => {
 
@@ -20,18 +20,18 @@ const Home = () => {
     }, []);
 
     return (
-        <UserLoggedInContainer curActiveScreen="home">
+        <LoggedInContainer curActiveScreen="artistHome">
             <PlaylistView
                 titleText="Fresh New Music"
                 cardsData={songData} />
-        </UserLoggedInContainer>
+        </LoggedInContainer>
     );
 };
 
 export default Home;
 
 const PlaylistView = ({ titleText, cardsData }) => {
-    
+
     return (
         <div className='text-white mt-6 cursor-pointer'>
             <div className='text-2xl font-semibold mb-5'>{titleText}</div>

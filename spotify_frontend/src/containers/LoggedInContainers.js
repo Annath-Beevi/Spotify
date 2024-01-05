@@ -122,20 +122,20 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
                             <IconText
                                 iconName={"material-symbols:home"}
                                 displayText={"Home"}
-                                targetLink={"/home"}
-                                active={curActiveScreen === "home"}
+                                targetLink={"/artistHome"}
+                                active={curActiveScreen === "artistHome"}
                             />
                             <IconText
                                 iconName={"material-symbols:search-rounded"}
                                 displayText={"Search"}
-                                targetLink={"/search"}
-                                active={curActiveScreen === "search"}
+                                targetLink={"/artistSearch"}
+                                active={curActiveScreen === "artistSearch"}
                             />
                             <IconText
                                 iconName={"bx:library"}
                                 displayText={"Library"}
-                                targetLink={"/library"}
-                                active={curActiveScreen === "library"}
+                                targetLink={"/artistLibrary"}
+                                active={curActiveScreen === "artistLibrary"}
                             />
                         </div>
                         <div className="pt-4">

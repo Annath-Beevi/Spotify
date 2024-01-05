@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import { Icon } from "@iconify/react";
-import LoggedInContainer from '../containers/LoggedInContainers'
-import {makeAuthenticatedGETRequest} from "../utils/serverHelper";
-import SingleSongCard from "../Components/shared/SingleSongCard";
+import UserLoggedInContainer from '../../containers/UserLoggedInContainer';
+import {makeAuthenticatedGETRequest} from "../../utils/serverHelper";
+import SingleSongCard from "../../Components/shared/SingleSongCard";
 
 export const SearchPage = () => {
 
@@ -19,7 +19,7 @@ export const SearchPage = () => {
     };
 
     return (
-        <LoggedInContainer curActiveScreen="search">
+        <UserLoggedInContainer curActiveScreen="search">
             <div className='w-full py-6'>
                 <div className={`w-1/3 p-3 text-sm rounded-full bg-gray-800 px-5 flex text-white space-x-3 items-center ${
                         isInputFocused ? "border border-white" : ""
@@ -68,7 +68,7 @@ export const SearchPage = () => {
                     </div>
                 )}
             </div>
-        </LoggedInContainer>
+        </UserLoggedInContainer>
     )
 }
 

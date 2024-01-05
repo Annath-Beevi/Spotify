@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import UserLoggedInContainer from '../containers/UserLoggedInContainer';
-import { makeAuthenticatedGETRequest } from '../utils/serverHelper';
+import UserLoggedInContainer from '../../containers/UserLoggedInContainer';
+import { makeAuthenticatedGETRequest } from '../../utils/serverHelper';
 import { useContext } from "react"
-import songContext from '../contexts/songContext'
+import songContext from '../../contexts/songContext'
 
 const Home = () => {
 

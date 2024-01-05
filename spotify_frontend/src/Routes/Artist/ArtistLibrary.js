@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import LoggedInContainer from "../containers/LoggedInContainers";
-import {makeAuthenticatedGETRequest} from "../utils/serverHelper";
+import LoggedInContainer from "../../containers/LoggedInContainers";
+import {makeAuthenticatedGETRequest} from "../../utils/serverHelper";
 
-const Library = () => {
+const ArtistLibrary = () => {
     const [myPlaylists, setMyPlaylists] = useState([]);
     useEffect(() => {
         const getData = async () => {
@@ -16,7 +16,7 @@ const Library = () => {
     }, []);
 
     return (
-        <LoggedInContainer curActiveScreen={"library"}>
+        <LoggedInContainer curActiveScreen={"artistLibrary"}>
             <div className="text-white text-xl pt-8 font-semibold">
                 My Playlists
             </div>
@@ -55,4 +55,4 @@ const Card = ({title, description, imgUrl, playlistId}) => {
     );
 };
 
-export default Library;
+export default ArtistLibrary;
