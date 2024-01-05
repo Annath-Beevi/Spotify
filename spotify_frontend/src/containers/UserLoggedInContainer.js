@@ -10,7 +10,7 @@ import AddToPlaylistModal from '../modals/AddToPlaylistModel';
 import { makeAuthenticatedPOSTRequest } from "../utils/serverHelper";
 import { useCookies } from 'react-cookie'
 
-export const LoggedInContainer = ({ children, curActiveScreen }) => {
+export const UserLoggedInContainer = ({ children, curActiveScreen }) => {
 
     const [createPlaylistModalOpen, setCreatePlaylistModalOpen] = useState(false);
     const [addToPlaylistModalOpen, setAddToPlaylistModalOpen] = useState(false);
@@ -86,7 +86,6 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
             setIsPaused(true)
         }
     }
-    
     const logout = () => {
         removeCookie('token');
     };
@@ -122,7 +121,7 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
                             <IconText
                                 iconName={"material-symbols:home"}
                                 displayText={"Home"}
-                                targetLink={"/home"}
+                                targetLink={"/artistHome"}
                                 active={curActiveScreen === "home"}
                             />
                             <IconText
@@ -150,12 +149,6 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
                                 iconName={"mdi:cards-heart"}
                                 displayText={"Liked Songs"}
                             />
-                            <IconText
-                                iconName={"entypo:music"}
-                                displayText={"My Music"}
-                                targetLink="/myMusic"
-                                active={curActiveScreen === "myMusic"}
-                            />
                         </div>
                     </div>
                     <div className="px-5">
@@ -174,11 +167,6 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
                             <a className='hover:border-white cursor-pointer' href='https://www.spotify.com/us/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade&ref=desktop_loggedin_upgrade_button'>
                                 Upgrade
                             </a>
-                        </div>
-                        <div className='border border-gray-400 text-white rounded-full px-3 py-1.5 font-semibold mt-3 mr-7'>
-                            <Link to="/uploadsong">
-                                Upload Song
-                            </Link>
                         </div>
                         <div className='border border-gray-400 bg-white rounded-full px-3 py-1.5 mt-3 mr-28'>
                             <button className='font-semibold' onClick={() => logout()}>
@@ -199,7 +187,7 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
                             className='h-14 w-14 rounded' />
                         <div className='pl-4'>
                             <div className='text-sm hover:underline cursor-pointer'>{currentSong.name}</div>
-                            <div className='text-xs text-gray-500 hover:underline cursor-pointer'>{currentSong.artist.firstName + " " + currentSong.artist.lastName}</div>
+                            {/* <div className='text-xs text-gray-500 hover:underline cursor-pointer'>{currentSong.artist.firstName + " " + currentSong.artist.lastName}</div> */}
                         </div>
                     </div>
                     <div className='w-1/2 flex justify-center h-full flex-col items-center'>
@@ -256,4 +244,4 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
     )
 };
 
-export default LoggedInContainer
+export default UserLoggedInContainer

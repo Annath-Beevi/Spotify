@@ -13,6 +13,7 @@ import songContext from './contexts/songContext';
 import SearchPage from './Routes/SearchPage';
 import Library from './Routes/Library';
 import SinglePlaylistView from './Routes/SinglePlaylistView';
+import ArtistHome from './Routes/ArtistHome';
 
 
 function App() {
@@ -39,13 +40,15 @@ function App() {
           >
             <Routes>
               <Route path='/' element={<Firstpage />} />
+              <Route path='/login' element={<LoginComponent />} />
               <Route path='/home' element={<LoggedInHomePage />} />
+              <Route path='/artistHome' element={<ArtistHome/>}/>
               <Route path='/uploadsong' element={<UploadSong />} />
               <Route path='/myMusic' element={<MyMusic />} />
               <Route path='/search' element={<SearchPage/>}/>
               <Route path='/library' element={<Library/>}/>
               <Route path='/playlist/:playlistId' element={<SinglePlaylistView/>}/>
-              <Route path='*' element={<Navigate to="/home" />} />
+              <Route path='*' element={<Navigate to="/login" />} />
             </Routes>
           </songContext.Provider>
         ) : (

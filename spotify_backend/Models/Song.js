@@ -13,6 +13,10 @@ const songSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    description:{
+        type: String,
+        required: true,
+    },
     artist: {
          type: mongoose.Types.ObjectId,
          ref: "User",

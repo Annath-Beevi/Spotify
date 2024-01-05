@@ -6,17 +6,20 @@ import { Icon } from '@iconify/react'
 import CloudinaryUpload from '../Components/shared/CloudinaryUpload'
 import { makeAuthenticatedPOSTRequest } from '../utils/serverHelper'
 import { useNavigate } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 
 export const UploadSong = () => {
 
     const [name, setName] = useState("");
     const [thumbnail, setThumbnail] = useState("");
+    const [description, setDescription] = useState("")
     const [playlistUrl, setPlaylistUrl] = useState("");
     const [uploadedSongFileName, setUploadedSongFileName] = useState();
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const navigate = useNavigate()
 
     const submitSong = async () => {
-        const data = {name, thumbnail, track: playlistUrl};
+        const data = { name, thumbnail, description, track: playlistUrl };
         const response = await makeAuthenticatedPOSTRequest(
             "/song/create",
             data
@@ -26,7 +29,11 @@ export const UploadSong = () => {
             return;
         }
         alert("Success");
-        navigate("/home");
+        navigate("/artistHome");
+    };
+
+    const logout = () => {
+        removeCookie('token');
     };
 
     return (
@@ -38,7 +45,7 @@ export const UploadSong = () => {
                         <img src={spotify_logo} alt='spotify logo' width={125} />
                     </div>
                     <div className="py-5">
-                        <IconText iconName={"material-symbols:home"} displayText={"Home"} targetLink={"/home"}/>
+                        <IconText iconName={"material-symbols:home"} displayText={"Home"} targetLink={"/home"} />
                         <IconText iconName={"material-symbols:search-rounded"} displayText={"Search"} />
                         <IconText iconName={"bx:library"} displayText={"Library"} />
                     </div>
@@ -75,8 +82,10 @@ export const UploadSong = () => {
                             Upgrade
                         </a>
                     </div>
-                    <div className='border border-gray-100 bg-white flex items-center justify-center rounded-full w-10 h-10 font-bold mt-3 mr-28'>
-                        AB
+                    <div className='border border-gray-400 bg-white rounded-full px-3 py-1.5 mt-3 mr-28'>
+                        <button className='font-semibold' onClick={() => logout()}>
+                            Logout
+                        </button>
                     </div>
                 </div>
                 <div className='content p-8 pt-0 overflow-auto'>
@@ -100,6 +109,15 @@ export const UploadSong = () => {
                                 placeholder="Thumbnail"
                                 value={thumbnail}
                                 setValue={setThumbnail}
+                            />
+                        </div>
+                        <div className="w-1/2">
+                            <TextInput
+                                label="Description"
+                                labelClassName={"text-white"}
+                                placeholder="Description"
+                                value={description}
+                                setValue={setDescription}
                             />
                         </div>
                     </div>

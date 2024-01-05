@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs")
 const { getToken } = require('../utils/helpers')
 
 const register = async (req, res) => {
-    const { email, password, firstName, lastName, username } = req.body
+    const { email, password, firstName, lastName, username, role } = req.body
     const existingUser = await User.findOne({ email: email })
     if (existingUser) {
         return res.status(403).json({ error: "A user with this email already exists" });
@@ -16,7 +16,8 @@ const register = async (req, res) => {
         password: hashedPassword,
         firstName,
         lastName,
-        username
+        username,
+        role
     }
     const newUser = await User.create(newUserData)
 

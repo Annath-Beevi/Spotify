@@ -3,13 +3,13 @@ const User = require('../Models/User')
 
 const createsong = async (req, res) => {
     console.log(req.user)
-    const { name, thumbnail, track } = req.body;
+    const { name, thumbnail,description, track } = req.body;
     if (!name || !thumbnail || !track) {
         return res.status(301).json({ err: "Insufficient details to create song." })
     }
     const artist = req.user._id;
     console.log(artist)
-    const songDetails = { name, thumbnail, track, artist }
+    const songDetails = { name, thumbnail,description, track, artist }
     const createdSong = await Song.create(songDetails)
     return res.status(200).json(createdSong)
 }
@@ -18,6 +18,11 @@ const getMySongs = async (req, res) => {
     // const currentUser = req.user;
     const songs = await Song.find({ artist: req.user._id }).populate("artist");
     return res.status(200).json({ data: songs })
+}
+
+const getAllSong = async (req,res) => {
+    const songs = await Song.find({})
+    res.status(200).json({songs})
 }
 
 const getArtist = async (req, res) => {
@@ -38,4 +43,4 @@ const getName = async (req, res) => {
     return res.status(200).json({ data: songs })
 }
 
-module.exports = { createsong, getMySongs, getArtist, getName }
+module.exports = { createsong, getMySongs, getArtist, getName, getAllSong }
