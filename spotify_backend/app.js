@@ -1,7 +1,7 @@
 const express = require("express");
 require("express-async-errors");
 require("dotenv").config()
-const JwtStrategy = require('passport-jwt').Strategy, 
+const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require("passport")
 
@@ -11,6 +11,7 @@ const User = require('./Models/User')
 const authRoute = require('./Routes/auth')
 const songRoute = require('./Routes/song')
 const playlistRoute = require('./Routes/playlist')
+const LikedRoute = require('./Routes/liked')
 const errorHandler = require('./Middleware/Error-Handler');
 const app = express();
 app.use(cors())
@@ -20,6 +21,7 @@ const port = 8080
 app.use("/auth", authRoute)
 app.use("/song", songRoute)
 app.use("/playlist", playlistRoute)
+app.use("/liked", LikedRoute)
 app.use(errorHandler)
 
 start = async () => {
@@ -31,15 +33,15 @@ start = async () => {
         opts.secretOrKey = process.env.PASSPORT_SECRET_KEY;
         passport.use(new JwtStrategy(opts, async function (jwt_payload, done) {
             try {
-                const user = await User.findOne({_id: jwt_payload.identifier });
+                const user = await User.findOne({ _id: jwt_payload.identifier });
                 if (user) {
-                return done(null, user);
+                    return done(null, user);
                 } else {
-                return done(null, false);
+                    return done(null, false);
                 }
-                } catch (err) {
+            } catch (err) {
                 return done(err, false)
-                }
+            }
         }))
         app.listen(port, console.log(`server running on port ${port}`))
     } catch (error) {

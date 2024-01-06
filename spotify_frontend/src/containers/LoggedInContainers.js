@@ -52,6 +52,15 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
         }
     };
 
+    const addSongToLikedSongs = async () => {
+        const songId = currentSong._id;
+        const payload = {songId};
+
+        const response = await makeAuthenticatedPOSTRequest(
+            "/liked/add/song", payload
+        )
+    }
+
     const playSound = () => {
         if (!soundPlayed) {
             return
@@ -149,6 +158,8 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
                             <IconText
                                 iconName={"mdi:cards-heart"}
                                 displayText={"Liked Songs"}
+                                targetLink={"/artistLikedSongs"}
+                                active={curActiveScreen === "artistLikedSongs"}
                             />
                             <IconText
                                 iconName={"entypo:music"}
@@ -247,6 +258,7 @@ export const LoggedInContainer = ({ children, curActiveScreen }) => {
                                 icon="ph:heart-bold"
                                 fontSize={25}
                                 className="cursor-pointer text-gray-500 hover:text-white"
+                                onClick={() => addSongToLikedSongs()}
                             />
                         </div>
                     </div>

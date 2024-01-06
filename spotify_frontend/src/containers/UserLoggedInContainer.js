@@ -2,7 +2,6 @@ import React, { useContext, useLayoutEffect, useRef, useState } from 'react'
 import spotify_logo from '../assets/images/spotify_logo_white.svg'
 import IconText from '../Components/shared/IconText'
 import { Icon } from '@iconify/react'
-import { Link, useNavigate } from 'react-router-dom';
 import { Howl, Howler } from "howler";
 import songContext from '../contexts/songContext';
 import CreatePlaylistModal from "../modals/CreatePlaylistModal";
@@ -51,6 +50,18 @@ export const UserLoggedInContainer = ({ children, curActiveScreen }) => {
             setAddToPlaylistModalOpen(false)
         }
     };
+
+    const addSongToLikedSongs = async () => {
+        const songId = currentSong._id;
+        const payload = {songId};
+
+        const response = await makeAuthenticatedPOSTRequest(
+            "/liked/add/song", payload
+        )
+        if(response){
+            alert("Song liked")
+        }
+    }
 
     const playSound = () => {
         if (!soundPlayed) {
@@ -121,7 +132,7 @@ export const UserLoggedInContainer = ({ children, curActiveScreen }) => {
                             <IconText
                                 iconName={"material-symbols:home"}
                                 displayText={"Home"}
-                                targetLink={"/artistHome"}
+                                targetLink={"/home"}
                                 active={curActiveScreen === "home"}
                             />
                             <IconText
@@ -148,6 +159,8 @@ export const UserLoggedInContainer = ({ children, curActiveScreen }) => {
                             <IconText
                                 iconName={"mdi:cards-heart"}
                                 displayText={"Liked Songs"}
+                                targetLink={"/likedSongs"}
+                                active={curActiveScreen === "likedSongs"}
                             />
                         </div>
                     </div>
@@ -235,6 +248,7 @@ export const UserLoggedInContainer = ({ children, curActiveScreen }) => {
                                 icon="ph:heart-bold"
                                 fontSize={25}
                                 className="cursor-pointer text-gray-500 hover:text-white"
+                                onClick={() => addSongToLikedSongs()}
                             />
                         </div>
                     </div>

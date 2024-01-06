@@ -16,6 +16,8 @@ import ArtistHome from './Routes/Artist/ArtistHome';
 import ArtistLibrary from './Routes/Artist/ArtistLibrary';
 import ArtistSearchPage from './Routes/Artist/ArtistSearchPage';
 import ArtistSinglePlaylistView from './Routes/Artist/ArtistSinglePlaylistView';
+import LikedSongs from './Routes/User/LikedSongs';
+import ArtistLikedSongs from './Routes/Artist/LikedSongs';
 
 
 function App() {
@@ -53,6 +55,8 @@ function App() {
               <Route path='artistLibrary' element={<ArtistLibrary/>}/>
               <Route path='artistSearch' element={<ArtistSearchPage/>}/>
               <Route path='/playlist/:playlistId' element={<ArtistSinglePlaylistView/>}/>
+              <Route path='/likedSongs' element={<LikedSongs/>}/>
+              <Route path='/artistLikedSongs' element={<ArtistLikedSongs/>}/>
               <Route path='*' element={<Navigate to="/home" />} />
             </Routes>
           </songContext.Provider>
