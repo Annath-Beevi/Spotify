@@ -27,4 +27,9 @@ const getLikedSongs = async (req, res) => {
 }
 
 
-module.exports = { addLikedSong, getLikedSongs }
+const getAllLikedSongs = async (req, res) => {
+    const liked = await Liked.find({})
+    res.status(200).json({liked})
+}
+
+module.exports = { addLikedSong, getLikedSongs , getAllLikedSongs}

@@ -27,9 +27,9 @@ const LoginComponent = () => {
             if (response.role === "artist") {
                 navigate("/artistHome")
             }
-            // if(response.role === "admin"){
-            //     navigate("")
-            // }
+            if(response.role === "admin"){
+                navigate("/dashboard")
+            }
 
         } else {
             alert("Failure");

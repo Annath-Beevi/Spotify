@@ -77,4 +77,9 @@ const addSong = async (req, res) => {
     return res.status(200).json(playlist);
 }
 
-module.exports = { createPlaylist, getPlaylist, getMe, getArtist, addSong }
+const getAllPlaylist = async (req, res) => {
+    const playlist = await Playlist.find({})
+    res.status(200).json({playlist})
+}
+
+module.exports = { createPlaylist, getPlaylist, getMe, getArtist, addSong, getAllPlaylist }

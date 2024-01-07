@@ -14,6 +14,7 @@ const SignupComponent = () => {
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [role, setRole] = useState("")
     const [cookie, setCookie] = useCookies(["token"])
     const navigate = useNavigate()
 
@@ -26,7 +27,7 @@ const SignupComponent = () => {
             alert("Please enter the fields")
             return
         }
-        const data = { email, password, username, firstName, lastName }
+        const data = { email, password, username, firstName, lastName, role }
         const response = await makeUnauthenticatedPOSTRequest("/auth/register", data)
         if (response && !response.err) {
             const token = response.token;
@@ -90,6 +91,12 @@ const SignupComponent = () => {
                             setValue={setLastName}
                         />
                     </div>
+                    <TextInput
+                        label="UserType"
+                        placeholder="Enter your usertype"
+                        value={role}
+                        setValue={setRole}
+                    />
                     <button className='bg-green-500 text-lg p-3 px-32 rounded-full w-full mt-8 mb-8 flex items-center 
                     justify-center font-semibold'
                         onClick={(e) => {

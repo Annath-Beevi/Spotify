@@ -43,4 +43,16 @@ const getName = async (req, res) => {
     return res.status(200).json({ data: songs })
 }
 
-module.exports = { createsong, getMySongs, getArtist, getName, getAllSong }
+const deleteSong = async (req, res) => {
+    const {songId} = req.params;
+
+    const song = await Song.findOneAndDelete({_id: songId});
+
+    if(!song){
+        res.status(404).json({msg: `No song with id ${songId}`})
+    }
+
+    res.status(200).json({song})
+}
+
+module.exports = { createsong, getMySongs, getArtist, getName, getAllSong, deleteSong }

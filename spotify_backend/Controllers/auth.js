@@ -50,4 +50,9 @@ const login = async (req, res) => {
     return res.status(200).json(userToReturn)
 }
 
-module.exports = { register, login}
+getAllUsers = async (req, res) => {
+    const users = await User.find({})
+    res.status(200).json({users})
+}
+
+module.exports = { register, login, getAllUsers}

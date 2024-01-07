@@ -18,6 +18,7 @@ import ArtistSearchPage from './Routes/Artist/ArtistSearchPage';
 import ArtistSinglePlaylistView from './Routes/Artist/ArtistSinglePlaylistView';
 import LikedSongs from './Routes/User/LikedSongs';
 import ArtistLikedSongs from './Routes/Artist/LikedSongs';
+import Dashboard from './Routes/Admin/Dashboard';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
               <Route path='/playlist/:playlistId' element={<ArtistSinglePlaylistView/>}/>
               <Route path='/likedSongs' element={<LikedSongs/>}/>
               <Route path='/artistLikedSongs' element={<ArtistLikedSongs/>}/>
+              <Route path='/dashboard' element={<Dashboard/>}/>
               <Route path='*' element={<Navigate to="/home" />} />
             </Routes>
           </songContext.Provider>
