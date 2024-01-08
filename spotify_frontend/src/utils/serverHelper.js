@@ -39,6 +39,19 @@ export const makeAuthenticatedGETRequest = async (route) => {
     return formattedResponse;
 };
 
+export const makeAuthenticatedDELETERequest = async (route) => {
+    const token = getToken();
+    const response = await fetch(backendUrl + route, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    const formattedResponse = await response.json();
+    return formattedResponse;
+};
+
 const getToken = () => {
     const accessToken = document.cookie.replace(
         /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,

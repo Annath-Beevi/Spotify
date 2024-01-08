@@ -51,8 +51,8 @@ export const AdminLoggedInContainer = ({ children, curActiveScreen }) => {
                             <IconText
                                 iconName={"mdi:cards-heart"}
                                 displayText={"Liked Songs"}
-                                targetLink={"/artistLikedSongs"}
-                                active={curActiveScreen === "artistLikedSongs"}
+                                targetLink={"/adminLikedSongs"}
+                                active={curActiveScreen === "adminLikedSongs"}
                             />
                         </div>
                     </div>
@@ -69,7 +69,7 @@ export const AdminLoggedInContainer = ({ children, curActiveScreen }) => {
                 <div className="h-full w-4/5 bg-app-black overflow-auto">
                     <div className='navbar w-full h-1/10 flex items-center justify-end'>
                         <div className='border border-gray-400 text-white rounded-full px-3 py-1.5 font-semibold mt-3 mr-7'>
-                            <Link to="/uploadsong">
+                            <Link to="/adminuploadsong">
                                 Upload Song
                             </Link>
                         </div>

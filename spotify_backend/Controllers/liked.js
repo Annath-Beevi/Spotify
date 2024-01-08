@@ -28,7 +28,7 @@ const getLikedSongs = async (req, res) => {
 
 
 const getAllLikedSongs = async (req, res) => {
-    const liked = await Liked.find({})
+    const liked = await Liked.find({}).populate("songs")
     res.status(200).json({liked})
 }
 

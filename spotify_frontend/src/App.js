@@ -19,6 +19,11 @@ import ArtistSinglePlaylistView from './Routes/Artist/ArtistSinglePlaylistView';
 import LikedSongs from './Routes/User/LikedSongs';
 import ArtistLikedSongs from './Routes/Artist/LikedSongs';
 import Dashboard from './Routes/Admin/Dashboard';
+import Users from './Routes/Admin/Users';
+import Songs from './Routes/Admin/Songs';
+import Playlists from './Routes/Admin/Playlists';
+import AdminLikedSongs from './Routes/Admin/LikedSongs';
+import AdminSongUpload from './Routes/Admin/AdminSongUpload';
 
 
 function App() {
@@ -59,6 +64,11 @@ function App() {
               <Route path='/likedSongs' element={<LikedSongs/>}/>
               <Route path='/artistLikedSongs' element={<ArtistLikedSongs/>}/>
               <Route path='/dashboard' element={<Dashboard/>}/>
+              <Route path='/users' element={<Users/>}/>
+              <Route path='/songs' element={<Songs/>}/>
+              <Route path='/playlist' element={<Playlists/>}/>
+              <Route path='/adminLikedSongs' element={<AdminLikedSongs/>}/>
+              <Route path='/adminuploadsong' element={<AdminSongUpload/>}/>
               <Route path='*' element={<Navigate to="/home" />} />
             </Routes>
           </songContext.Provider>

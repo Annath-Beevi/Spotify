@@ -21,7 +21,7 @@ const getMySongs = async (req, res) => {
 }
 
 const getAllSong = async (req,res) => {
-    const songs = await Song.find({})
+    const songs = await Song.find({}).populate("artist")
     res.status(200).json({songs})
 }
 
