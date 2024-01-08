@@ -29,7 +29,7 @@ export const AdminSongUpload = () => {
             return;
         }
         alert("Success");
-        navigate("/artistHome");
+        navigate("/dashboard");
     };
 
     const logout = () => {

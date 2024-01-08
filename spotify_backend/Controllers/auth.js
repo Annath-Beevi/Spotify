@@ -50,9 +50,21 @@ const login = async (req, res) => {
     return res.status(200).json(userToReturn)
 }
 
-getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
     const users = await User.find({})
     res.status(200).json({users})
 }
 
-module.exports = { register, login, getAllUsers}
+const deleteUser = async (req,res) => {
+    const {userId} = req.params;
+
+    const user = await User.findOneAndDelete({_id: userId});
+
+    if(!user){
+        res.status(404).json({msg: `No user with id ${userId}`})
+    }
+
+    res.status(200).json({user})
+}
+
+module.exports = { register, login, getAllUsers, deleteUser}

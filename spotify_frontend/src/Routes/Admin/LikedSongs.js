@@ -20,18 +20,21 @@ const AdminLikedSongs = () => {
             <div className="text-white text-xl pt-8 font-semibold">
                 Liked Songs
             </div>
-            <div className="py-5 grid gap-5 grid-cols-5">
-                {likedSongs.map((item) => {
-                    return (
-                        <Card
-                            key={JSON.stringify(item)}
-                            title={item.songs.name}
-                            description=""
-                            imgUrl={item.songs.thumbnail}
-                        />
-                    );
-                })}
-            </div>
+            {likedSongs._id && (
+                <div className="py-5 grid gap-5 grid-cols-5">
+                    {likedSongs.map((item) => {
+                        return (
+                            <Card
+                                key={JSON.stringify(item)}
+                                title={item.songs.name}
+                                description=""
+                                imgUrl={item.songs.thumbnail}
+                            />
+                        );
+                    })}
+                </div>
+            )}
+
         </AdminLoggedInContainer>
     )
 }
