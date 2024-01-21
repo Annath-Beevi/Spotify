@@ -20,7 +20,6 @@ const AdminLikedSongs = () => {
             <div className="text-white text-xl pt-8 font-semibold">
                 Liked Songs
             </div>
-            {likedSongs._id && (
                 <div className="py-5 grid gap-5 grid-cols-5">
                     {likedSongs.map((item) => {
                         return (
@@ -33,8 +32,6 @@ const AdminLikedSongs = () => {
                         );
                     })}
                 </div>
-            )}
-
         </AdminLoggedInContainer>
     )
 }

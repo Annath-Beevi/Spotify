@@ -23,7 +23,10 @@ const Home = () => {
         <UserLoggedInContainer curActiveScreen="home">
             <PlaylistView
                 titleText="Fresh New Music"
-                cardsData={songData} />
+                cardsData={songData.slice(0, 5)} />
+            <PlaylistView
+                titleText="India's Best"
+                cardsData={songData.slice(5, 10)} />
         </UserLoggedInContainer>
     );
 };
@@ -31,7 +34,7 @@ const Home = () => {
 export default Home;
 
 const PlaylistView = ({ titleText, cardsData }) => {
-    
+
     return (
         <div className='text-white mt-6 cursor-pointer'>
             <div className='text-2xl font-semibold mb-5'>{titleText}</div>

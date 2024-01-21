@@ -23,7 +23,10 @@ const Home = () => {
         <LoggedInContainer curActiveScreen="artistHome">
             <PlaylistView
                 titleText="Fresh New Music"
-                cardsData={songData} />
+                cardsData={songData.slice(0, 5)} />
+            <PlaylistView
+                titleText="India's Best"
+                cardsData={songData.slice(5, 10)} />
         </LoggedInContainer>
     );
 };
